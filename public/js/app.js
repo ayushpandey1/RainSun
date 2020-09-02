@@ -19,25 +19,27 @@ dateElement.textContent = new Date().getDate() + ", " + monthNames[new Date().ge
 
 weatherForm.addEventListener('submit', (event) => {
     event.preventDefault();
+    //console.log(search.value);
     locationElement.textContent = "Loading...";
     tempElement.textContent = "";
     weatherCondition.textContent = "";
     const locationApi = fetchWeather + "?address=" + search.value;
-    fetch(locationApi).then(response => {
-        response.json().then(data => {
+    fetch(locationApi).then(response => {                            //get the data from that particular API
+        response.json().then(data => {                               //convert the response in json format
+            //console.log(data);
             if(data.error) {
                 locationElement.textContent = data.error;
                 tempElement.textContent = "";
                 weatherCondition.textContent = "";
             } else {
                 console.log()
-                if(data.description === "rain" || data.description === "fog") {
+                if(data.description === "rain" || data.description === "fog") {     //handling the icon of different weather
                     weatherIcon.className = "wi wi-day-" + data.description
                 } else {
                     weatherIcon.className = "wi wi-day-cloudy"
                 }
                 locationElement.textContent = data.cityName;
-                tempElement.textContent = (data.temperature - 273.5).toFixed(2) + String.fromCharCode(176);
+                tempElement.textContent = (data.temperature - 273.5).toFixed(2) + String.fromCharCode(176); //176 is used for degree sign
                 weatherCondition.textContent = data.description.toUpperCase();
             }
         }) 
