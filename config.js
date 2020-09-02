@@ -1,3 +1,4 @@
+//This file create an object & its going to export that particular object & use this generic data in any of the file
 const constants = {
     openWeatherMap: { 
         BASE_URL: "https://api.openweathermap.org/data/2.5/weather?q=",
