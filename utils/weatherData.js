@@ -3,7 +3,10 @@ const constants = require('../config');
 
 const weatherData = (address, callback) => {
     const url = constants.openWeatherMap.BASE_URL + encodeURIComponent(address) + '&appid=' + constants.openWeatherMap.SECRET_KEY;
-    request({url, json:true}, (error, {body})=> {
+    //console.log(url);
+    //callback(true);
+    request({url, json:true}, (error, {body})=> {                               //Object deconstruction
+        //consol.log(body);
         if(error) {
             callback("Data can't be fetched from open weather map api ", undefined)
         } else if(!body.main || !body.main.temp || !body.name || !body.weather) {
